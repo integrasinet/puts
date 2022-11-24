@@ -1,0 +1,21 @@
+global gConnectionID
+   #set the sslCertificates to "/etc/ssl/certs/ca-certificates.crt"
+   #libURLSetSSLVerification false
+   -- set up the connection parameters - edit these to suit your database
+   put "195.154.71.177:9406" into tDatabaseAddress
+   put "berak" into tDatabaseName
+   put "berak" into tDatabaseUser
+   put "Berak1213.," into tDatabasePassword
+   	
+   -- connect to the database
+   put revOpenDatabase("MySQL", tDatabaseAddress, tDatabaseName, tDatabaseUser, tDatabasePassword) into tResult
+   	
+   -- check if it worked and display an error message if it didn't
+   -- & set the connection ID global
+   if tResult is a number then
+      put tResult into gConnectionID
+      put gConnectionID
+   else
+      put empty into gConnectionID
+      put "Unable to connect to the database:" & cr & tResult
+   end if
